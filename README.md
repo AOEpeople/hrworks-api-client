@@ -1,4 +1,4 @@
-#HRWorks-Api-Client
+# HRWorks-Api-Client
 
 This client is written Kotlin but can be used in all JVM Languages. Currently it is
 publish on jitpack.io and can be used by simply adding the dependency to your project.
@@ -10,7 +10,8 @@ If you see something that you don't like get in touch
 and most of all have fun
 
 
-##Used Technologies
+## Used Technologies
+
 [gradle](https://github.com/gradle/gradle)  
 [kotlin](https://github.com/JetBrains/kotlin)  
 [RxKotlin](https://github.com/ReactiveX/RxKotlin)  
@@ -19,7 +20,7 @@ and most of all have fun
 [Retrofit Gson Converter](https://github.com/square/retrofit/tree/master/retrofit-converters/gson)  
 [OkHttp](http://square.github.io/okhttp/)
 
-##Gradle
+## Gradle
 
 Add the jitpack.io repo to the project repos
 ``` groovy
@@ -38,7 +39,7 @@ dependencies {
 }
 ```
 
-##Maven
+## Maven
 Add the jitpack.io repo to the project repos
 ``` xml
 <repositories>
@@ -57,7 +58,7 @@ and then adding add the implementation dependency
 	    <version>master</version>
 	</dependency>
 ```
-##Usage in Kotlin
+## Usage in Kotlin
 ``` kotlin
 import com.aoe.hrworks.HrWorksClientBuilder
 
@@ -72,7 +73,7 @@ fun main(args: Array<String>) {
 }
 ```
 
-##Usage in Java
+## Usage in Java
 ```java
 import com.aoe.hrworks.HrWorksClient;
 import com.aoe.hrworks.HrWorksClientBuilder;
