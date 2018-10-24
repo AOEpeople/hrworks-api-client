@@ -52,11 +52,11 @@ Add the jitpack.io repo to the project repos
 and then adding add the implementation dependency
 
 ``` xml
-	<dependency>
-	    <groupId>com.github.AOEpeople</groupId>
-	    <artifactId>hrworks-api-client</artifactId>
-	    <version>master</version>
-	</dependency>
+<dependency>
+    <groupId>com.github.AOEpeople</groupId>
+    <artifactId>hrworks-api-client</artifactId>
+    <version>master</version>
+</dependency>
 ```
 ## Usage in Kotlin
 ``` kotlin
