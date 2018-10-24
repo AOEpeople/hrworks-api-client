@@ -2,7 +2,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.2.71'
 }
 
-group 'org.evil.hrworks'
+group 'com.aoe.hrworks'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -22,7 +22,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'com.github.stefanbirkner:system-rules:1.18.0'
 }
 
 compileKotlin {
