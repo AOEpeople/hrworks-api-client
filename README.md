@@ -92,3 +92,21 @@ public class Sample {
 }
 
 ```
+## Usage in Scala
+```scala
+import com.aoe.hrworks.HrWorksClientBuilder
+
+object Sample {
+
+  def main(args: Array[String]): Unit = {
+    val client = HrWorksClientBuilder.INSTANCE.buildClient("key","secret")
+    client.getAllActivePersons
+      .blockingGet()
+      .forEach((k, v) =>
+        System.out.println(s"key: $k, value: $v")
+      )
+  }
+
+}
+
+```
