@@ -34,7 +34,7 @@ and then adding add the implementation dependency
 ``` groovy
 dependencies {
     ...
-    implementation 'com.github.AOEpeople:hrworks-api-client:1.0.0'
+    implementation 'com.github.AOEpeople:hrworks-api-client:1.0.1'
     ...
 }
 ```
@@ -55,7 +55,7 @@ and then adding add the implementation dependency
 <dependency>
     <groupId>com.github.AOEpeople</groupId>
     <artifactId>hrworks-api-client</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 </dependency>
 ```
 ## Usage in Kotlin

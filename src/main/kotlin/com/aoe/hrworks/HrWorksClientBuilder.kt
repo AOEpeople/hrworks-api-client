@@ -38,7 +38,7 @@ object HrWorksClientBuilder {
             .appendLiteral('Z').toFormatter()
 
     private val USE_IN_SIGNATURE =
-            listOf(HEADER_CONTENT_TYPE, HEADER_DATE, HEADER_HOST, HEADER_HR_WORKS_TARGET)
+            listOf(HEADER_CONTENT_TYPE, HEADER_DATE, HEADER_HOST, HEADER_HR_WORKS_TARGET).sortedBy { it }
 
 
     @JvmOverloads
@@ -118,7 +118,9 @@ object HrWorksClientBuilder {
                         }.hexString()
 
 
-                        builder.addHeader("Authorization", "HRWORKS-HMAC-SHA256 Credential=${URLEncoder.encode(apiKey, ENCODING)}/$realm, Signature=$signature")
+                        builder.addHeader("Authorization", "HRWORKS-HMAC-SHA256 Credential=${URLEncoder.encode(apiKey, ENCODING)}/$realm, " +
+                                "SignedHeaders=${USE_IN_SIGNATURE.map { it.toLowerCase().trim() }.joinToString(";")}, " +
+                                "Signature=$signature")
 
                         chain.proceed(builder.build())
                     }.build()
