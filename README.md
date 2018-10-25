@@ -73,6 +73,23 @@ fun main(args: Array<String>) {
 }
 ```
 
+## Usage in Groovy
+````groovy
+import com.aoe.hrworks.HrWorksClientBuilder
+
+class Sample {
+
+    static void main(String[] args){
+        def client = HrWorksClientBuilder.INSTANCE.
+                buildClient("key","secret")
+
+        client.allActivePersons.blockingGet().each {
+            println(it)
+        }
+    }
+}
+````
+
 ## Usage in Java
 ```java
 import com.aoe.hrworks.HrWorksClient;
