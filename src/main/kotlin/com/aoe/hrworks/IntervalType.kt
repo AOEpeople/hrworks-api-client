@@ -19,5 +19,4 @@ class IntervalTypeAdapter : TypeAdapter<IntervalType>() {
     }
 
     override fun read(`in`: JsonReader?): IntervalType = throw UnsupportedOperationException("not used")
-
 }

@@ -1,8 +1,6 @@
 package com.aoe.hrworks
 
-enum class Realm(val apiValue : String) {
-
+enum class Realm(val apiValue: String) {
     DEMO("demo"),
     PRODUCTION("production")
-
 }
