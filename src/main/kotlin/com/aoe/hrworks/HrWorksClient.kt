@@ -86,11 +86,11 @@ data class Availability(
 )
 
 data class LeaveAccountData(
-    val holidayEntitlement: Int,
-    val requested: Int,
-    val approved: Int,
-    val unplanned: Int,
-    val planned: Int
+    val holidayEntitlement: Double,
+    val requested: Double,
+    val approved: Double,
+    val unplanned: Double,
+    val planned: Double
 )
 
 data class Person(
