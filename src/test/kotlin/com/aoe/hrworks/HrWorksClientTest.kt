@@ -12,7 +12,11 @@ class HrWorksClientTest {
     companion object {
         val API_KEY = System.getenv("HRWORKS_API_KEY")
         val API_SECRET = System.getenv("HRWORKS_API_SECRET")
+        val ORG_UNIT_NUMBER_1 = System.getenv("HRWORKS_ORG_UNIT_1")// "26" or "2020"
+        val ORG_UNIT_NUMBER_2 = System.getenv("HRWORKS_ORG_UNIT_2")//"11" or "2030"
+        val TEST_USER = System.getenv("HRWORKS_TEST_USER")//"silas.schwarz@aoe.com" or "ML"
     }
+
 
     @Test
     fun testGetGetPresentPersonsOfOrganizationUnit() {
@@ -22,7 +26,7 @@ class HrWorksClientTest {
 
         val testObserver = TestObserver.create<PersonList>()
 
-        client.getPresentPersonsOfOrganizationUnit(GetPresentPersonsOfOrganizationUnitRq("3"))
+        client.getPresentPersonsOfOrganizationUnit(GetPresentPersonsOfOrganizationUnitRq(ORG_UNIT_NUMBER_1))
             .subscribe(testObserver)
 
         testObserver.values().forEach {
@@ -66,6 +70,7 @@ class HrWorksClientTest {
         testObserver.assertComplete()
     }
 
+
     @Test
     fun testGetAllActivePersonsWithRq() {
         val client = HrWorksClientBuilder.buildClient(
@@ -74,7 +79,7 @@ class HrWorksClientTest {
 
         val testObserver = TestObserver.create<Map<String, List<Person>>>()
 
-        client.getAllActivePersons(GetAllActivePersonsRq(listOf("26", "11"))).subscribe(testObserver)
+        client.getAllActivePersons(GetAllActivePersonsRq(listOf(ORG_UNIT_NUMBER_1, ORG_UNIT_NUMBER_2))).subscribe(testObserver)
 
         testObserver.values().forEach {
             println(it)
@@ -93,7 +98,7 @@ class HrWorksClientTest {
 
         val request = GetAvailableWorkingHoursRq(beginDate = Date.from(LocalDate.now().minus(7, ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toInstant()),
             endDate = Date(),
-            idOrPersonnelNumberList = listOf("silas.schwarz@aoe.com"))
+            idOrPersonnelNumberList = listOf(TEST_USER))
 
         client.getAvailableWorkingHours(request).subscribe(testObserver)
 
@@ -148,7 +153,7 @@ class HrWorksClientTest {
 
         val testObserver = TestObserver.create<Map<String, LeaveAccountData>>()
 
-        val request = GetLeaveAccountDataRq(idOrNumberList = listOf("silas.schwarz@aoe.com"))
+        val request = GetLeaveAccountDataRq(idOrNumberList = listOf(TEST_USER))
 
         client.getLeaveAccountData(request).subscribe(testObserver)
 
@@ -169,7 +174,7 @@ class HrWorksClientTest {
 
         val request = GetAbsencesRq(beginDate = Date.from(LocalDate.now().minus(40, ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toInstant()),
             endDate = Date(),
-            idOrPersonnelNumberList = listOf("silas.schwarz@aoe.com"))
+            idOrPersonnelNumberList = listOf(TEST_USER))
 
         client.getAbsences(request).subscribe(testObserver)
 
@@ -190,13 +195,30 @@ class HrWorksClientTest {
 
         val request = GetAccumulatedAbsencesRq(beginDate = Date.from(LocalDate.now().minus(40, ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toInstant()),
             endDate = Date(),
-            idOrPersonnelNumberList = listOf("silas.schwarz@aoe.com"))
+            idOrPersonnelNumberList = listOf(TEST_USER))
 
         client.getAccumulatedAbsences(request).subscribe(testObserver)
 
         testObserver.values().forEach {
             println(it)
         }
+
+        testObserver.assertComplete()
+    }
+
+    @Test
+    fun testGetHolidays() {
+        val client = HrWorksClientBuilder.buildClient(
+            apiKey = API_KEY,
+            apiSecret = API_SECRET)
+
+        val testObserver = TestObserver.create<Map<String, HolidayData>>()
+
+        val request = GetHolidaysRq(year = 2019)
+
+        client.getHolidays(request).subscribe(testObserver)
+
+        testObserver.values().forEach { println(it) }
 
         testObserver.assertComplete()
     }
