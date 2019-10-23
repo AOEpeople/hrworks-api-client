@@ -224,6 +224,26 @@ class HrWorksClientTest {
     }
 
     @Test
+    fun testGetPersonMasterData() {
+        val client = HrWorksClientBuilder.buildClient(
+            apiKey = API_KEY,
+            apiSecret = API_SECRET)
+
+//        val testObserver = TestObserver.create<List<Any>>()
+
+        val request = GetPersonMasterDataRq(listOf("ML", "TB1", "TB3"))
+
+        val single = client.getPersonMasterData(request)
+        val personMasterData = single.blockingGet()
+        println(personMasterData)
+//        personMasterData.subscribe(testObserver)
+//
+//        testObserver.values().forEach { println(it) }
+//
+//        testObserver.assertComplete()
+    }
+
+    @Test
     fun testComplexUse() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
