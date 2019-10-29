@@ -12,17 +12,17 @@ class HrWorksClientTest {
     companion object {
         val API_KEY = System.getenv("HRWORKS_API_KEY")
         val API_SECRET = System.getenv("HRWORKS_API_SECRET")
-        val ORG_UNIT_NUMBER_1 = System.getenv("HRWORKS_ORG_UNIT_1")// "26" or "2020"
-        val ORG_UNIT_NUMBER_2 = System.getenv("HRWORKS_ORG_UNIT_2")//"11" or "2030"
-        val TEST_USER = System.getenv("HRWORKS_TEST_USER")//"silas.schwarz@aoe.com" or "ML"
+        val ORG_UNIT_NUMBER_1 = System.getenv("HRWORKS_ORG_UNIT_1") // "26" or "2020"
+        val ORG_UNIT_NUMBER_2 = System.getenv("HRWORKS_ORG_UNIT_2") // "11" or "2030"
+        val TEST_USER = System.getenv("HRWORKS_TEST_USER") // "silas.schwarz@aoe.com" or "ML"
     }
-
 
     @Test
     fun testGetGetPresentPersonsOfOrganizationUnit() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<PersonList>()
 
@@ -40,7 +40,8 @@ class HrWorksClientTest {
     fun testGetAllOrganizationUnits() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<OrganizationUnitList>()
 
@@ -57,7 +58,8 @@ class HrWorksClientTest {
     fun testGetAllActivePersons() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, List<Person>>>()
 
@@ -70,16 +72,17 @@ class HrWorksClientTest {
         testObserver.assertComplete()
     }
 
-
     @Test
     fun testGetAllActivePersonsWithRq() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, List<Person>>>()
 
-        client.getAllActivePersons(GetAllActivePersonsRq(listOf(ORG_UNIT_NUMBER_1, ORG_UNIT_NUMBER_2))).subscribe(testObserver)
+        client.getAllActivePersons(GetAllActivePersonsRq(listOf(ORG_UNIT_NUMBER_1, ORG_UNIT_NUMBER_2)))
+            .subscribe(testObserver)
 
         testObserver.values().forEach {
             println(it)
@@ -92,13 +95,21 @@ class HrWorksClientTest {
     fun testGetAvailableWorkingHours() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, List<Availability>>>()
 
-        val request = GetAvailableWorkingHoursRq(beginDate = Date.from(LocalDate.now().minus(7, ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+        val request = GetAvailableWorkingHoursRq(
+            beginDate = Date.from(
+                LocalDate.now().minus(
+                    7,
+                    ChronoUnit.DAYS
+                ).atStartOfDay(ZoneId.systemDefault()).toInstant()
+            ),
             endDate = Date(),
-            idOrPersonnelNumberList = listOf(TEST_USER))
+            idOrPersonnelNumberList = listOf(TEST_USER)
+        )
 
         client.getAvailableWorkingHours(request).subscribe(testObserver)
 
@@ -113,7 +124,8 @@ class HrWorksClientTest {
     fun testGetAllAbsenceTypesWithoutRq() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<AbsenceTypeList>()
 
@@ -130,7 +142,8 @@ class HrWorksClientTest {
     fun testGetAllAbsenceTypesWithRq() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<AbsenceTypeList>()
 
@@ -149,7 +162,8 @@ class HrWorksClientTest {
     fun testGetLeaveAccountData() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, LeaveAccountData>>()
 
@@ -168,13 +182,21 @@ class HrWorksClientTest {
     fun testGetAbsence() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, List<AbsenceData>>>()
 
-        val request = GetAbsencesRq(beginDate = Date.from(LocalDate.now().minus(40, ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+        val request = GetAbsencesRq(
+            beginDate = Date.from(
+                LocalDate.now().minus(
+                    40,
+                    ChronoUnit.DAYS
+                ).atStartOfDay(ZoneId.systemDefault()).toInstant()
+            ),
             endDate = Date(),
-            idOrPersonnelNumberList = listOf(TEST_USER))
+            idOrPersonnelNumberList = listOf(TEST_USER)
+        )
 
         client.getAbsences(request).subscribe(testObserver)
 
@@ -189,13 +211,21 @@ class HrWorksClientTest {
     fun testGetAccumulatedAbsence() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, List<AccumulatedAbsenceData>>>()
 
-        val request = GetAccumulatedAbsencesRq(beginDate = Date.from(LocalDate.now().minus(40, ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toInstant()),
+        val request = GetAccumulatedAbsencesRq(
+            beginDate = Date.from(
+                LocalDate.now().minus(
+                    40,
+                    ChronoUnit.DAYS
+                ).atStartOfDay(ZoneId.systemDefault()).toInstant()
+            ),
             endDate = Date(),
-            idOrPersonnelNumberList = listOf(TEST_USER))
+            idOrPersonnelNumberList = listOf(TEST_USER)
+        )
 
         client.getAccumulatedAbsences(request).subscribe(testObserver)
 
@@ -210,7 +240,8 @@ class HrWorksClientTest {
     fun testGetHolidays() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, HolidayData>>()
 
@@ -227,27 +258,26 @@ class HrWorksClientTest {
     fun testGetPersonMasterData() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
-//        val testObserver = TestObserver.create<List<Any>>()
+        val testObserver = TestObserver.create<Map<String, List<PersonMasterData>>>()
 
         val request = GetPersonMasterDataRq(listOf("ML", "TB1", "TB3"))
 
-        val single = client.getPersonMasterData(request)
-        val personMasterData = single.blockingGet()
-        println(personMasterData)
-//        personMasterData.subscribe(testObserver)
-//
-//        testObserver.values().forEach { println(it) }
-//
-//        testObserver.assertComplete()
+        client.getPersonMasterData(request).subscribe(testObserver)
+
+        testObserver.values().forEach { println(it) }
+
+        testObserver.assertComplete()
     }
 
     @Test
     fun testComplexUse() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testSubscriber = TestObserver.create<List<Map<String, List<Availability>>>>()
 
@@ -257,12 +287,19 @@ class HrWorksClientTest {
                 .asSequence()
                 .map { person -> person.personId }
                 .chunked(50).map { personIdList ->
-                    client.getAvailableWorkingHours(GetAvailableWorkingHoursRq(
-                        beginDate = Date.from(LocalDate.now().minus(1, ChronoUnit.DAYS).atStartOfDay(ZoneId.systemDefault()).toInstant()),
-                        endDate = Date(),
-                        idOrPersonnelNumberList = personIdList,
-                        interval = IntervalType.DAYS
-                    )).blockingGet()
+                    client.getAvailableWorkingHours(
+                        GetAvailableWorkingHoursRq(
+                            beginDate = Date.from(
+                                LocalDate.now().minus(
+                                    1,
+                                    ChronoUnit.DAYS
+                                ).atStartOfDay(ZoneId.systemDefault()).toInstant()
+                            ),
+                            endDate = Date(),
+                            idOrPersonnelNumberList = personIdList,
+                            interval = IntervalType.DAYS
+                        )
+                    ).blockingGet()
                 }
                 .toList()
         }.subscribe(testSubscriber)
@@ -276,7 +313,8 @@ class HrWorksClientTest {
     fun whoIsInToday() {
         val client = HrWorksClientBuilder.buildClient(
             apiKey = API_KEY,
-            apiSecret = API_SECRET)
+            apiSecret = API_SECRET
+        )
 
         val testObserver = TestObserver.create<Map<String, List<Absence>>>()
 
@@ -288,12 +326,14 @@ class HrWorksClientTest {
 
             val peopleWithAbsense = everybody.chunked(50)
                 .map { personIdListChunk ->
-                    client.getAbsences(GetAbsencesRq(
-                        beginDate = Date(),
-                        endDate = Date(),
-                        idOrPersonnelNumberList = personIdListChunk,
-                        interval = IntervalType.DAYS
-                    )).blockingGet()
+                    client.getAbsences(
+                        GetAbsencesRq(
+                            beginDate = Date(),
+                            endDate = Date(),
+                            idOrPersonnelNumberList = personIdListChunk,
+                            interval = IntervalType.DAYS
+                        )
+                    ).blockingGet()
                 }.fold(mapOf<String, List<Absence>>()) { acc, currentResult ->
                     acc + (currentResult.map { resultMap -> resultMap.key to resultMap.value.flatMap { it.absences } })
                 }.toMutableMap()

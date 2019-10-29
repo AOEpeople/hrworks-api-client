@@ -60,7 +60,6 @@ interface HrWorksClient {
     @POST("/")
     @Headers("${HrWorksClientBuilder.HEADER_HR_WORKS_TARGET}: GetAbsences")
     fun getAccumulatedAbsences(@Body request: GetAccumulatedAbsencesRq): Single<Map<String, List<AccumulatedAbsenceData>>>
-
 }
 
 data class PersonList(
