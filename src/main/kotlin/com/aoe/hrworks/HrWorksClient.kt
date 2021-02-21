@@ -114,7 +114,10 @@ data class Absence(
     val beginDate: Date,
     val endDate: Date,
     val status: String,
-    val workingDays: String
+    val workingDays: String,
+    val isForenoonHalfDay: Boolean,
+    val isAfternoonHalfDay: Boolean
+
 )
 
 data class GetPresentPersonsOfOrganizationUnitRq(
