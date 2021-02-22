@@ -18,6 +18,14 @@ interface HrWorksClient {
     fun getAllOrganizationUnits(): Single<OrganizationUnitList>
 
     @POST("/")
+    @Headers("${HrWorksClientBuilder.HEADER_HR_WORKS_TARGET}: GetAllPermanentEstablishments")
+    fun getAllPermanentEstablishments(): Single<List<PermanentEstablishment>>
+
+    @POST("/")
+    @Headers("${HrWorksClientBuilder.HEADER_HR_WORKS_TARGET}: GetHolidays")
+    fun getHolidays(@Body request: GetHolidaysRq): Single<Map<String, HolidayData>>
+
+    @POST("/")
     @Headers("${HrWorksClientBuilder.HEADER_HR_WORKS_TARGET}: GetAllActivePersons")
     fun getAllActivePersons(@Body request: GetAllActivePersonsRq): Single<Map<String, List<Person>>>
 
@@ -67,6 +75,23 @@ data class OrganizationUnit(
     val organizationUnitName: String
 )
 
+data class PermanentEstablishment(
+    val name: String,
+    val id: String
+)
+
+data class HolidayData(
+    val permamentEstablishmentHolidays: Map<String, List<Holiday>>,
+    val stateHolidays: Map<String, List<Holiday>>,
+    val generalHolidays: List<Holiday>
+)
+
+data class Holiday(
+    val date: Date,
+    val isHalfDay: Boolean,
+    val name: String
+)
+
 data class AbsenceData(
     val beginDate: Date,
     val endDate: Date,
@@ -114,11 +139,20 @@ data class Absence(
     val beginDate: Date,
     val endDate: Date,
     val status: String,
-    val workingDays: String
+    val workingDays: String,
+    val isForenoonHalfDay: Boolean,
+    val isAfternoonHalfDay: Boolean
+
 )
 
 data class GetPresentPersonsOfOrganizationUnitRq(
     val organizationUnitNumber: String
+)
+
+data class GetHolidaysRq(
+    val year: Int,
+    val countryCodes: List<String>? = null,
+    val permanentEstablishments: List<String>? = null
 )
 
 data class GetAllActivePersonsRq(
