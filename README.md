@@ -53,9 +53,9 @@ and then adding add the implementation dependency
 
 ``` xml
 <dependency>
-    <groupId>com.github.AOEpeople</groupId>
+    <groupId>com.github.Syncwork-AG</groupId>
     <artifactId>hrworks-api-client</artifactId>
-    <version>1.0.2</version>
+    <version>1.5.0</version>
 </dependency>
 ```
 ## Usage in Kotlin
