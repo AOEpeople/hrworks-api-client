@@ -34,7 +34,7 @@ and then adding add the implementation dependency
 ``` groovy
 dependencies {
     ...
-    implementation 'com.github.AOEpeople:hrworks-api-client:1.0.2'
+    implementation 'com.github.Syncwork-AG:hrworks-api-client:1.5.0'
     ...
 }
 ```
