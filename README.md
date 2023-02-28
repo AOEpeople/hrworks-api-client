@@ -1,4 +1,4 @@
-# HRWorks-Api-Client
+# :no_entry: [DEPRECATED] HRWorks-Api-Client
 
 This client is written Kotlin but can be used in all JVM Languages. Currently it is
 publish on jitpack.io and can be used by simply adding the dependency to your project.
