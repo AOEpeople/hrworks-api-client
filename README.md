@@ -1,5 +1,9 @@
 # HRWorks-Api-Client
 
+> [!IMPORTANT]\
+> This project is discontinued since the version 1 of the HRworks API is deprecated and no longer working.
+> Refer to [Version 2](https://github.com/Syncwork-AG/hrworks-api-client-v2) of the API client instead.
+
 This client is written Kotlin but can be used in all JVM Languages. Currently it is
 publish on jitpack.io and can be used by simply adding the dependency to your project.
 
