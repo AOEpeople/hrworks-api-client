@@ -1,5 +1,9 @@
 # :no_entry: [DEPRECATED] HRWorks-Api-Client
 
+> [!IMPORTANT]\
+> This project is discontinued since the version 1 of the HRworks API is deprecated and no longer working.
+> Refer to [Version 2](https://github.com/Syncwork-AG/hrworks-api-client-v2) of the API client instead.
+
 This client is written Kotlin but can be used in all JVM Languages. Currently it is
 publish on jitpack.io and can be used by simply adding the dependency to your project.
 
@@ -34,7 +38,7 @@ and then adding add the implementation dependency
 ``` groovy
 dependencies {
     ...
-    implementation 'com.github.AOEpeople:hrworks-api-client:1.0.2'
+    implementation 'com.github.Syncwork-AG:hrworks-api-client:1.5.0'
     ...
 }
 ```
@@ -53,9 +57,9 @@ and then adding add the implementation dependency
 
 ``` xml
 <dependency>
-    <groupId>com.github.AOEpeople</groupId>
+    <groupId>com.github.Syncwork-AG</groupId>
     <artifactId>hrworks-api-client</artifactId>
-    <version>1.0.2</version>
+    <version>1.5.0</version>
 </dependency>
 ```
 ## Usage in Kotlin
